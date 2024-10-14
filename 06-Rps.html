@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock paper scissor</title>
+</head>
+<body>
+  <h1>Rock paper scissors</h1>
+  <button onclick="
+    let result;
+     if(compMove=== 'Rock')
+     {
+      result = 'Tie';
+     }
+     else if (compMove==='Paper')
+     {
+      result = 'You lose';
+     }
+
+     else if (compMove === 'Scissors')
+     {
+      result = 'you won'
+     }
+
+     alert(`you choosed Rock ,Computer choosed ${compMove}, ${result}`);
+    ">
+    Rock
+  </button>
+
+  <button onclick="
+     if(compMove=== 'Rock')
+     {
+      result = 'You won';
+     }
+     else if (compMove==='Paper')
+     {
+      result = 'Tie';
+     }
+
+     else if (compMove === 'Scissors')
+     {
+      result = 'you lose';
+     }
+
+     alert(`you choosed paper ,Computer choosed ${compMove}, ${result}`);"> 
+    Paper
+  </button>
+
+  <button onclick="
+    
+     if(compMove=== 'Rock')
+     {
+      result = 'You lose';
+     }
+     else if (compMove==='Paper')
+     {
+      result = 'You won';
+     }
+
+     else if (compMove === 'Scissors')
+     {
+      result = 'Tie';
+     }
+
+     alert(`you choosed Scissors ,Computer choosed ${compMove}, ${result}`);">
+    scissors
+  </button>
+  
+  <script>
+    let compMove = Math.random();
+    
+    if (compMove>0 && compMove<1/3)
+    {
+      compMove = 'Rock';
+      // alert(compMove);
+    }
+    else if (compMove>1/3 && compMove<2/3)
+    {
+      compMove = 'Paper';
+      // alert(compMove);
+      
+    }
+    else if (compMove>2/3 && compMove<1)
+    {
+      compMove = 'Scissors';
+      // alert(compMove);
+    }
+
+  </script>
+</body>
+</html>
