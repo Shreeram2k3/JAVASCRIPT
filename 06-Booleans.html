@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stone-paper-scissors</title>
+</head>
+<body>
+    <p> Stone Paper Scissors</p>
+
+    <button onclick="
+         let compMove = Math.random();
+         compMove = compMove < 1/3 ? 'Stone' : compMove < 2/3 ? 'Paper' : 'Scissors';
+        let result;
+
+        if(compMove === 'Stone')
+            result = 'Tie';
+        else if (compMove == 'Paper')
+            result = 'You Lose';
+        else
+            result = 'You Won';
+
+            alert(`You choosed Stone,Computer choosed ${compMove} ${result}`);
+
+        
+    ">Stone</button>
+    
+    <button onclick="
+         compMove = Math.random();
+         compMove = compMove < 1/3 ? 'Stone' : compMove < 2/3 ? 'Paper' : 'Scissors';
+        if(compMove === 'Stone')
+            result = 'You Won';
+        else if (compMove == 'Paper')
+            result =  'Tie';
+        else
+            result = 'You Lose';
+
+            alert(`You choosed Paper,Computer choosed ${compMove} ${result}`);
+    ">Paper</button>
+
+    <button onclick="
+         compMove = Math.random();
+         compMove = compMove < 1/3 ? 'Stone' : compMove < 2/3 ? 'Paper' : 'Scissors';
+        if(compMove === 'Stone')
+            result = 'You Lose';
+        else if (compMove == 'Paper')
+            result = 'You Won';
+        else
+            result =  'Tie';
+
+            alert(`You choosed Scissiors,Computer choosed ${compMove} ${result}`);
+    ">Scissors</button>
+
+</body>
+</html>
