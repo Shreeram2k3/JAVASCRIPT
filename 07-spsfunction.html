@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stone-Paper-Scissors</title>
+</head>
+<body>
+    <p>Stone Paper Scissors</p>
+
+    <button onclick="
+        let result;
+        let computerMove = getComputerMove();
+
+        if (computerMove === 'Stone')
+            result = 'Tie';
+        else if (computerMove === 'Paper')
+            result = 'You Lose';
+        else
+            result = 'You Won';
+
+        alert(`You chose Stone, Computer chose ${computerMove}. ${result}`);
+    ">Stone</button>
+
+    <button onclick="
+        let result;
+        let computerMove = getComputerMove();
+
+        if (computerMove === 'Stone')
+            result = 'You Won';
+        else if (computerMove === 'Paper')
+            result = 'Tie';
+        else
+            result = 'You Lose';
+
+        alert(`You chose Paper, Computer chose ${computerMove}. ${result}`);
+    ">Paper</button>
+
+    <button onclick="
+        let result;
+        let computerMove = getComputerMove();
+
+        if (computerMove === 'Stone')
+            result = 'You Lose';
+        else if (computerMove === 'Paper')
+            result = 'You Won';
+        else
+            result = 'Tie';
+
+        alert(`You chose Scissors, Computer chose ${computerMove}. ${result}`);
+    ">Scissors</button>
+
+    <script>
+        function getComputerMove() {
+            let move = Math.random();
+            return move < 1/3 ? 'Stone' : move < 2/3 ? 'Paper' : 'Scissors';
+        }
+    </script>
+</body>
+</html>
