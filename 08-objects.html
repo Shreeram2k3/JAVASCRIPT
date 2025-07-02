@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>spsobject</title>
+</head>
+<body>
+  <button onclick="
+   result('Stone',selectCompMove())
+
+  ">Stone</button>
+
+  <button onclick="
+    result('Paper',selectCompMove())
+  ">Paper</button>  
+
+  <button onclick="
+    result('Scissors',selectCompMove())
+  ">Scissors</button>
+
+  <button onclick="
+    resetScore();
+  ">Reset Score</button>
+
+  <script>
+    let Score=JSON.parse(localStorage.getItem('Score'))||{
+      won:0,
+      loss:0,
+      tie:0
+    };
+    // function to choose computer move 
+    let compMove;
+    function selectCompMove()
+    {
+      compMove= Math.random();
+      if(compMove>0&&compMove<=0.3)
+      {
+        compMove='Stone';
+      }
+      else if(compMove>0.3&&compMove<=0.6)
+      {
+        compMove='Paper';
+      }
+      else
+      {
+        compMove='Scissors';
+      }
+
+      console.log(compMove); 
+      return compMove;
+
+    }
+  //  selectCompMove();
+  //  result('Stone',compMove);
+   
+
+  //  function to decide the result
+  function result(usermove,compMove)
+  {
+    if(usermove===compMove)
+    {
+      alert(`you choosed ${usermove}, computer choosed ${compMove}, Tie`)
+      console.log(usermove);
+      Score.tie++;
+      console.log(Score);
+    }
+    else if(usermove==='Stone'&&compMove==='Paper')
+    {
+      alert(`you choosed ${usermove}, computer choosed ${compMove}, Loss`)
+      Score.loss++;
+      console.log(Score);
+    }
+    else if(usermove==='Stone'&&compMove==='Scissors')
+    {
+      alert(`you choosed ${usermove}, computer choosed ${compMove}, Won`)
+      Score.won++;
+      console.log(Score);
+    }
+
+    else if(usermove==='Paper'&&compMove==='Stone')
+    {
+      alert(`you choosed ${usermove}, computer choosed ${compMove}, Won`)
+            Score.won++;
+            console.log(Score);
+    }
+    else if(usermove==='Paper'&&compMove==='Scissors')
+    {
+      alert(`you choosed ${usermove}, computer choosed ${compMove}, loss`)
+      Score.loss++;
+      console.log(Score);
+    }
+
+    else if(usermove==='Scissors'&&compMove==='Stone')
+    {
+      alert(`you choosed ${usermove}, computer choosed ${compMove}, Loss`)
+      Score.loss++;
+      console.log(Score);
+    }
+    else if(usermove==='Scissors'&&compMove==='Paper')
+    {
+      alert(`you choosed ${usermove}, computer choosed ${compMove}, Won`)
+            Score.won++;
+            console.log(Score);
+    }
+
+    localStorage.setItem('Score',JSON.stringify(Score));
+    console.log(localStorage.getItem('Score'));
+
+  }
+
+  function resetScore()
+  {
+    Score={
+      won:0,
+      loss:0,
+      tie:0
+    };
+    
+    localStorage.removeItem('Score');
+    console.log(Score);
+  }
+    
+  </script>
+</body>
+</html>
