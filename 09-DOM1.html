@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .button
+    {
+      background-color: red;
+      border: none;
+      height: 50px;
+      width: 150px;
+      color: white;
+      border-radius: 5px;
+    }
+
+    .button:hover{
+      opacity: 80%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body style="background-color: black; color: white;">
+
+    <h1>This is a subscribe button!</h1>
+  <button onclick="
+    Subscribe();
+  " class="button">Subscribe
+  </button>
+  
+
+  <script>
+    function Subscribe()
+    {
+      const text = document.querySelector('.button').innerText;
+
+      if(text==='Subscribe')
+      {
+        document.querySelector('.button').innerText='Subscribed!';
+      }
+      else{
+        document.querySelector('.button').innerText='Subscribe';
+      }
+
+     
+    }
+    // Subscribe();
+  </script>
+
+</body>
+</html>
