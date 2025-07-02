@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>spsobject</title>
+  <style>
+    body{
+      background-color: black;
+      color: white;
+    }
+
+    button{
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: rgb(228, 244, 7);
+      border: none;
+
+    }
+    .resetbtn{
+      background-color: aliceblue;
+      border-radius: 0%;
+      height: 50px;
+      width: 150px;
+      border-radius: 5px;
+      background-color: rgb(131, 111, 239); 
+      color: aliceblue;
+    }
+    .resetbtn:hover{
+      cursor: pointer;
+      background-color: rgb(143, 127, 235);
+
+    }
+    
+  </style>
+</head>
+<body>
+  <h1>Play a Game</h1>
+  
+    <button onclick="
+   result('Stone',selectCompMove())
+
+  ">Stone</button>
+
+  <button onclick="
+    result('Paper',selectCompMove())
+  ">Paper</button>  
+
+  <button onclick="
+    result('Scissors',selectCompMove())
+  ">Scissors</button>
+
+  <p class="moveElem"></p>
+
+  <button onclick="
+    resetScore();
+  " class="resetbtn">Reset Score</button>
+
+  <h2>----Live Score ----</h2>
+  <h3 class="scoreElem"></h4>
+
+ 
+
+  <script>
+    let Score=JSON.parse(localStorage.getItem('Score'))||{
+      won:0,
+      loss:0,
+      tie:0
+    };
+
+    document.querySelector('.scoreElem').innerHTML=
+    `won:${Score.won}<br> loss:${Score.loss}<br> tie:${Score.tie}`
+    // function to choose computer move 
+    let compMove;
+    function selectCompMove()
+    {
+      compMove= Math.random();
+      if(compMove>0&&compMove<=0.3)
+      {
+        compMove='Stone';
+      }
+      else if(compMove>0.3&&compMove<=0.6)
+      {
+        compMove='Paper';
+      }
+      else
+      {
+        compMove='Scissors';
+      }
+
+      console.log(compMove); 
+      return compMove;
+
+    }
+  //  selectCompMove();
+  //  result('Stone',compMove);
+   
+
+  //  function to decide the result
+  function result(usermove,compMove)
+  {
+    if(usermove===compMove)
+    {
+     
+      console.log(usermove);
+      Score.tie++;
+      console.log(Score);
+      document.querySelector('.moveElem')
+        .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Tie`;
+    }
+    else if(usermove==='Stone'&&compMove==='Paper')
+    {
+      document.querySelector('.moveElem')
+        .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, loss`;
+      Score.loss++;
+      console.log(Score);
+    }
+    else if(usermove==='Stone'&&compMove==='Scissors')
+    {
+      document.querySelector('.moveElem')
+        .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Won`;
+      Score.won++;
+      console.log(Score);
+    }
+
+    else if(usermove==='Paper'&&compMove==='Stone')
+    {
+       document.querySelector('.moveElem')
+        .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Won`;
+            Score.won++;
+            console.log(Score);
+    }
+    else if(usermove==='Paper'&&compMove==='Scissors')
+    {
+       document.querySelector('.moveElem')
+        .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Loss`;
+      Score.loss++;
+      console.log(Score);
+    }
+
+    else if(usermove==='Scissors'&&compMove==='Stone')
+    {
+       document.querySelector('.moveElem')
+        .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Loss`;
+      Score.loss++;
+      console.log(Score);
+    }
+    else if(usermove==='Scissors'&&compMove==='Paper')
+    {
+       document.querySelector('.moveElem')
+        .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Won`;
+            Score.won++;
+            console.log(Score);
+    }
+
+    localStorage.setItem('Score',JSON.stringify(Score));
+    console.log(localStorage.getItem('Score'));
+
+     document.querySelector('.scoreElem').innerHTML=
+    `won:${Score.won}<br> loss:${Score.loss}<br> tie:${Score.tie}`
+
+  }
+
+  function resetScore()
+  {
+    Score={
+      won:0,
+      loss:0,
+      tie:0
+    };
+    
+    localStorage.removeItem('Score');
+    console.log(Score);
+    document.querySelector('.scoreElem').innerHTML=
+    `won:${Score.won}<br> loss:${Score.loss}<br> tie:${Score.tie}`
+  }
+    
+  </script>
+</body>
+</html>
