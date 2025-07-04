@@ -10,13 +10,22 @@
       color: white;
     }
 
-    button{
+    .button{
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      background-color: rgb(228, 244, 7);
-      border: none;
+      background-color: rgb(3, 3, 3);
+      border-color: white;
+      border-width: 3px;
+      font-size: 40px;
 
+    }
+    .button:hover{
+      cursor: pointer;
+      scale: 110%;
+    }
+    .button:active{
+      background-color: rgb(81, 188, 49);
     }
     .resetbtn{
       background-color: aliceblue;
@@ -41,15 +50,15 @@
     <button onclick="
    result('Stone',selectCompMove())
 
-  ">Stone</button>
+  " class="button">✊</button>
 
   <button onclick="
     result('Paper',selectCompMove())
-  ">Paper</button>  
+  " class="button">🖐️</button>  
 
   <button onclick="
     result('Scissors',selectCompMove())
-  ">Scissors</button>
+  " class="button">✌️</button>
 
   <p class="moveElem"></p>
 
