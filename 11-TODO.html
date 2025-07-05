@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TODO</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="bg-gradient-to-br from-slate-800 to-gray-900 text-white font-sans">
+  <div class="min-h-screen flex flex-col items-center justify-center px-4 py-10">
+    <div class="bg-white text-gray-900 rounded-3xl shadow-2xl p-10 w-full max-w-2xl border border-gray-200">
+      <h1 class="text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-emerald-500 mb-10">📝 Your Tasks</h1>
+
+      <div class="flex items-center gap-4 mb-10">
+        <input
+          type="text"
+          id="taskElem"
+          placeholder="What do you want to do today?"
+          class="flex-grow text-lg px-6 py-4 rounded-xl border border-gray-300 shadow-inner focus:outline-none focus:ring-2 focus:ring-sky-400 placeholder:text-gray-400"
+          onkeydown="if(event.key === 'Enter') addTask();"
+        />
+        <button
+          onclick="addTask();"
+          class="bg-gradient-to-r from-green-400 to-emerald-500 hover:brightness-110 transition text-white px-6 py-4 rounded-xl shadow-lg hover:scale-105"
+        >
+          <i class="fa-solid fa-plus text-xl"></i>
+        </button>
+      </div>
+
+      <div class="flex justify-between items-center mb-4">
+        <div class="flex gap-2">
+          <button onclick="filterTasks('all')" class="px-4 py-2 rounded-lg text-sm font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300">All</button>
+          <button onclick="filterTasks('active')" class="px-4 py-2 rounded-lg text-sm font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300">Pending</button>
+          <button onclick="filterTasks('completed')" class="px-4 py-2 rounded-lg text-sm font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300">Completed</button>
+        </div>
+        <div id="taskCount" class="text-sm text-gray-600"></div>
+      </div>
+
+      <div id="divTaskelem" class="space-y-4">
+        <!-- Tasks will appear here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let filter = 'all';
+
+    function addTask() {
+      const input = document.querySelector("#taskElem");
+      const taskText = input.value.trim();
+      if (taskText === "") return;
+
+      tasks.push({ text: taskText, done: false });
+      input.value = "";
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTask();
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTask();
+    }
+
+    function toggleDone(index) {
+      tasks[index].done = !tasks[index].done;
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTask();
+    }
+
+    function filterTasks(type) {
+      filter = type;
+      renderTask();
+    }
+
+    function renderTask() {
+      const container = document.getElementById("divTaskelem");
+      let filteredTasks = tasks;
+      if (filter === 'active') filteredTasks = tasks.filter(t => !t.done);
+      else if (filter === 'completed') filteredTasks = tasks.filter(t => t.done);
+
+      container.innerHTML = filteredTasks.map((task, i) => {
+        const taskIndex = tasks.indexOf(task);
+        return `
+          <div class="flex items-center justify-between p-4 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md hover:shadow-lg transition transform hover:scale-[1.01]">
+            <span id="task-text-${taskIndex}" class="text-lg font-medium ${task.done ? 'line-through text-gray-400' : 'text-gray-800'}">
+              ${task.text}
+            </span>
+            <div class="space-x-2">
+              <button onclick="toggleDone(${taskIndex})" class="p-2 bg-green-100 rounded-full hover:bg-green-200 transition shadow">
+                <i class="fa-solid fa-check ${task.done ? 'text-green-800' : 'text-green-600'}"></i>
+              </button>
+              <button onclick="deleteTask(${taskIndex})" class="p-2 bg-red-100 rounded-full hover:bg-red-200 transition shadow">
+                <i class="fa-solid fa-xmark text-red-600"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById("taskCount").innerText = `${filteredTasks.length} task${filteredTasks.length !== 1 ? 's' : ''} ${filter !== 'all' ? '(' + filter + ')' : ''}`;
+    }
+
+    window.onload = renderTask;
+  </script>
+</body>
+</html>
