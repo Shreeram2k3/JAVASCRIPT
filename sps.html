@@ -20,13 +20,7 @@
       font-size: 40px;
 
     }
-    .button:hover{
-      cursor: pointer;
-      scale: 110%;
-    }
-    .button:active{
-      background-color: rgb(81, 188, 49);
-    }
+    
     .resetbtn{
       background-color: aliceblue;
       border-radius: 0%;
@@ -35,11 +29,6 @@
       border-radius: 5px;
       background-color: rgb(131, 111, 239); 
       color: aliceblue;
-    }
-    .resetbtn:hover{
-      cursor: pointer;
-      background-color: rgb(143, 127, 235);
-
     }
     
   </style>
@@ -137,30 +126,30 @@
     {
        document.querySelector('.moveElem')
         .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Won`;
-            Score.won++;
-            console.log(Score);
+        Score.won++;
+        console.log(Score);
     }
     else if(usermove==='Paper'&&compMove==='Scissors')
     {
        document.querySelector('.moveElem')
         .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Loss`;
-      Score.loss++;
-      console.log(Score);
+        Score.loss++;
+        console.log(Score);
     }
 
     else if(usermove==='Scissors'&&compMove==='Stone')
     {
        document.querySelector('.moveElem')
         .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Loss`;
-      Score.loss++;
-      console.log(Score);
+        Score.loss++;
+        console.log(Score);
     }
     else if(usermove==='Scissors'&&compMove==='Paper')
     {
        document.querySelector('.moveElem')
         .innerHTML=`you choosed ${usermove}, computer choosed ${compMove}, Won`;
-            Score.won++;
-            console.log(Score);
+        Score.won++;
+        console.log(Score);
     }
 
     localStorage.setItem('Score',JSON.stringify(Score));
@@ -184,6 +173,45 @@
     document.querySelector('.scoreElem').innerHTML=
     `won:${Score.won}<br> loss:${Score.loss}<br> tie:${Score.tie}`
   }
+
+   document.addEventListener('keydown',(e)=>{
+      if(e.key==='r' || e.key==='R'){
+        result('Stone',selectCompMove());
+      }
+      else if(e.key==='p' || e.key==='P'){
+        result('Paper',selectCompMove());
+      }
+      else if(e.key==='s' || e.key==='S'){
+        result('Scissors',selectCompMove());
+      }
+    });
+
+      const allButtons = document.querySelectorAll('.button');
+
+      allButtons.forEach(btn => {
+          
+        btn.addEventListener('mouseover', () => {
+        btn.style.transform = "scale(1.1)";
+        btn.style.cursor = "pointer";
+        });
+
+        btn.addEventListener('mouseout', () => {
+          btn.style.transform = "scale(1)";
+        });
+
+        btn.addEventListener("mousedown", () => {
+        btn.style.backgroundColor = "rgb(81, 188, 49)";
+        });
+
+        btn.addEventListener("mouseup", () => {
+          btn.style.backgroundColor = "";
+        });
+
+      });  
+
+
+
+
     
   </script>
 </body>
